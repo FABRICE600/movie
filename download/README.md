@@ -325,6 +325,14 @@ Then `bun run db:push`.
 - All sensitive mutations (password change, profile update, deletion) are audit-logged
 - `getCurrentUser()` checks both NextAuth sessions (OAuth) and custom session cookies (email/password) — both work in parallel
 
+### Status
+
+| Provider | Status |
+| --- | --- |
+| Email / Password | ✅ Working (default) |
+| Google OAuth | ✅ Verified working — redirect to `accounts.google.com/o/oauth2/v2/auth` with PKCE confirmed |
+| GitHub OAuth | 🔧 Wired — activates when `GITHUB_CLIENT_ID` + `GITHUB_CLIENT_SECRET` are set in `.env.local` |
+
 ### Enabling Google OAuth
 
 1. Go to https://console.cloud.google.com/apis/credentials

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Search, Menu, X, Sun, Moon, Bell, Film, LogOut, User, LayoutDashboard, Heart, Bookmark } from "lucide-react";
+import { Search, Menu, X, Sun, Moon, Bell, Film, LogOut, User, LayoutDashboard, Heart, Bookmark, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
@@ -35,6 +35,18 @@ const NAV_ITEMS: NavItem[] = [
   { label: "Trending", view: "trending" },
   { label: "Top Rated", view: "top-rated" },
   { label: "Upcoming", view: "upcoming" },
+  { label: "Box Office", view: "box-office" },
+  { label: "Awards", view: "awards" },
+  { label: "Calendar", view: "calendar" },
+  { label: "Collections", view: "collections" },
+  { label: "Providers", view: "providers" },
+  { label: "Trailers", view: "trailers" },
+  { label: "Franchises", view: "franchises" },
+  { label: "Compare", view: "compare" },
+  { label: "AI Assistant", view: "ai-assistant" },
+  { label: "Trivia", view: "trivia" },
+  { label: "Year in Review", view: "year-review" },
+  { label: "About", view: "about" },
 ];
 
 export function Navbar() {
@@ -129,6 +141,26 @@ export function Navbar() {
                 {item.label}
               </button>
             ))}
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <button
+                  className={`px-3 py-2 text-sm font-medium rounded-md transition-colors flex items-center gap-1 ${
+                    ["box-office","awards","calendar","collections","providers","trailers","franchises","compare","ai-assistant","trivia","year-review","about"].includes(view)
+                      ? "text-foreground bg-muted"
+                      : "text-muted-foreground hover:text-foreground hover:bg-muted/60"
+                  }`}
+                >
+                  More <ChevronDown className="h-3 w-3" />
+                </button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="start" className="w-48">
+                {NAV_ITEMS.slice(9).map((item) => (
+                  <DropdownMenuItem key={item.view} onClick={() => navigate(item.view, item.params)}>
+                    {item.label}
+                  </DropdownMenuItem>
+                ))}
+              </DropdownMenuContent>
+            </DropdownMenu>
           </nav>
 
           {/* Search (desktop) */}

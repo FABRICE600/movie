@@ -27,7 +27,20 @@ export type ViewName =
   | "trailers"
   | "about"
   | "privacy"
-  | "terms";
+  | "terms"
+  | "ai-assistant"
+  | "box-office"
+  | "awards"
+  | "calendar"
+  | "compare"
+  | "settings"
+  | "subscription"
+  | "help"
+  | "faq"
+  | "contact"
+  | "trivia"
+  | "year-review"
+  | "franchises";
 
 interface ViewState {
   view: ViewName;

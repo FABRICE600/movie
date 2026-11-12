@@ -19,6 +19,16 @@ import {
   TrailersView,
   StaticPage,
 } from "@/components/views/listing-views";
+import { AiAssistantView } from "@/components/views/ai-assistant-view";
+import { BoxOfficeView } from "@/components/views/box-office-view";
+import { AwardsView } from "@/components/views/awards-view";
+import { CalendarView } from "@/components/views/calendar-view";
+import { CompareView } from "@/components/views/compare-view";
+import { SettingsView } from "@/components/views/settings-view";
+import { HelpView } from "@/components/views/help-view";
+import { TriviaView } from "@/components/views/trivia-view";
+import { YearReviewView } from "@/components/views/year-review-view";
+import { FranchisesView } from "@/components/views/franchises-view";
 
 export default function Home() {
   const view = useAppStore((s) => s.view);
@@ -88,6 +98,32 @@ function CurrentView({ view, navigate }: { view: string; navigate: any }) {
       return <StaticPage kind="privacy" />;
     case "terms":
       return <StaticPage kind="terms" />;
+    case "ai-assistant":
+      return <AiAssistantView />;
+    case "box-office":
+      return <BoxOfficeView />;
+    case "awards":
+      return <AwardsView />;
+    case "calendar":
+      return <CalendarView />;
+    case "compare":
+      return <CompareView />;
+    case "settings":
+      return <SettingsView />;
+    case "subscription":
+      return <SettingsView initialTab="subscription" />;
+    case "help":
+      return <HelpView kind="help" />;
+    case "faq":
+      return <HelpView kind="faq" />;
+    case "contact":
+      return <HelpView kind="contact" />;
+    case "trivia":
+      return <TriviaView />;
+    case "year-review":
+      return <YearReviewView />;
+    case "franchises":
+      return <FranchisesView />;
     default:
       return <HomeView />;
   }

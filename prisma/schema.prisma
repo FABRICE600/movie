@@ -32,6 +32,12 @@ model User {
   notifications Notification[]
   activityLogs  ActivityLog[]
   sessions      Session[]
+  subscriptions Subscription[]
+  payments      Payment[]
+  userAchievements UserAchievement[]
+  supportTickets SupportTicket[]
+  viewingHistory ViewingHistory[]
+  searchHistory SearchHistory[]
 }
 
 model Session {
@@ -172,4 +178,144 @@ model ApiCache {
   payload   String
   fetchedAt DateTime @default(now())
   ttlSec    Int      @default(3600)
+}
+
+model Subscription {
+  id              String   @id @default(cuid())
+  userId          String
+  plan            String   // FREE | PREMIUM_MONTHLY | PREMIUM_YEARLY
+  status          String   @default("ACTIVE") // ACTIVE | CANCELED | EXPIRED | PAST_DUE
+  startDate       DateTime @default(now())
+  endDate         DateTime?
+  autoRenew       Boolean  @default(true)
+  paymentProvider String?  // STRIPE | PAYPAL | MOBILE_MONEY
+  externalSubId   String?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  user            User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  payments        Payment[]
+
+  @@index([userId])
+}
+
+model Payment {
+  id              String   @id @default(cuid())
+  subscriptionId  String
+  userId          String
+  amount          Float
+  currency        String   @default("USD")
+  provider        String   // STRIPE | PAYPAL | MOBILE_MONEY
+  status          String   @default("PENDING") // PENDING | SUCCEEDED | FAILED | REFUNDED
+  externalPaymentId String?
+  invoiceUrl      String?
+  receiptUrl      String?
+  description     String?
+  createdAt       DateTime @default(now())
+  subscription    Subscription @relation(fields: [subscriptionId], references: [id], onDelete: Cascade)
+  user            User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([subscriptionId])
+}
+
+model Coupon {
+  id          String   @id @default(cuid())
+  code        String   @unique
+  type        String   // PERCENT | FIXED
+  value       Float
+  validFrom   DateTime @default(now())
+  validTo     DateTime?
+  maxUses     Int      @default(100)
+  usedCount   Int      @default(0)
+  active      Boolean  @default(true)
+  createdAt   DateTime @default(now())
+}
+
+model Follow {
+  id          String   @id @default(cuid())
+  followerId  String
+  followeeId  String
+  createdAt   DateTime @default(now())
+
+  @@unique([followerId, followeeId])
+  @@index([followeeId])
+}
+
+model Achievement {
+  id          String   @id @default(cuid())
+  slug        String   @unique
+  name        String
+  description String
+  icon        String
+  tier        String   @default("BRONZE") // BRONZE | SILVER | GOLD | PLATINUM
+  createdAt   DateTime @default(now())
+
+  userAchievements UserAchievement[]
+}
+
+model UserAchievement {
+  id            String   @id @default(cuid())
+  userId        String
+  achievementId String
+  earnedAt      DateTime @default(now())
+  achievement   Achievement @relation(fields: [achievementId], references: [id], onDelete: Cascade)
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, achievementId])
+  @@index([userId])
+}
+
+model SupportTicket {
+  id          String   @id @default(cuid())
+  userId      String?
+  subject     String
+  category    String   @default("GENERAL") // GENERAL | BILLING | TECHNICAL | CONTENT | ABUSE
+  priority    String   @default("NORMAL") // LOW | NORMAL | HIGH | URGENT
+  status      String   @default("OPEN") // OPEN | IN_PROGRESS | RESOLVED | CLOSED
+  message     String
+  email       String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  user        User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  @@index([userId])
+  @@index([status])
+}
+
+model Report {
+  id          String   @id @default(cuid())
+  reporterId  String?
+  targetType  String   // REVIEW | COMMENT | USER | COLLECTION
+  targetId    String
+  reason      String
+  status      String   @default("PENDING") // PENDING | REVIEWED | ACTIONED | DISMISSED
+  createdAt   DateTime @default(now())
+
+  @@index([targetType, targetId])
+  @@index([status])
+}
+
+model SearchHistory {
+  id          String   @id @default(cuid())
+  userId      String?
+  query       String
+  resultsCount Int     @default(0)
+  createdAt   DateTime @default(now())
+  user        User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  @@index([userId])
+}
+
+model ViewingHistory {
+  id          String   @id @default(cuid())
+  userId      String
+  tmdbId      Int
+  mediaType   String
+  watchedAt   DateTime @default(now())
+  duration    Int?     // seconds watched
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([tmdbId, mediaType])
 }

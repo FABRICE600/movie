@@ -1,0 +1,1688 @@
+# ULTIMATE MASTER PROMPT: BUILD A COMPLETE PROFESSIONAL MOVIE DISCOVERY AND STREAMING PLATFORM WITH 800+ FEATURES
+
+## 1. YOUR ROLE
+
+Act as an expert team consisting of:
+
+- Senior Full-Stack Software Engineer
+- React.js and Next.js Developer
+- TypeScript Developer
+- Node.js Backend Engineer
+- PostgreSQL Database Administrator
+- TMDB and OMDb API Integration Specialist
+- UI/UX Designer
+- AI and Recommendation Engineer
+- Cybersecurity Engineer
+- DevOps and Cloud Deployment Engineer
+- Software Tester and Quality Assurance Engineer
+
+Your mission is to build a complete, professional, production-ready movie discovery and entertainment platform with at least 800 individually implemented functional features.
+
+The platform should provide an experience inspired by Netflix, IMDb, TMDB, Prime Video, and other professional movie discovery platforms.
+
+IMPORTANT: Build a genuine working application, not just a static UI demonstration.
+
+If an existing project is supplied, inspect and continue the existing project. Preserve working features, existing configurations, database structures, and integrations wherever possible.
+
+---
+
+# 2. PROJECT VISION
+
+Build a modern movie platform that allows users to:
+
+- Discover movies from around the world.
+- Search movies and television series.
+- Access real-time movie information through online APIs.
+- Explore actors, actresses, directors, and production companies.
+- Watch official movie trailers.
+- Discover streaming providers and availability.
+- Rate and review movies.
+- Create personal watchlists.
+- Follow actors and directors.
+- Receive movie release notifications.
+- Get AI-powered recommendations.
+- Compare movies.
+- Explore movie franchises.
+- Participate in community discussions.
+- Manage personal movie collections.
+- Access premium features.
+- Manage the entire platform through an administrator dashboard.
+
+The application must support international movies, including Hollywood, Bollywood, Nollywood, African cinema, Rwandan cinema, Korean movies, Japanese movies, Chinese movies, European cinema, and other international productions.
+
+---
+
+# 3. TECHNOLOGY STACK
+
+Frontend:
+- Next.js or React.js.
+- TypeScript.
+- Tailwind CSS.
+- React Query or TanStack Query.
+- Zustand or Redux Toolkit.
+- Framer Motion.
+- Lucide React icons.
+- React Hook Form.
+- Zod validation.
+
+Backend:
+- Node.js.
+- Express.js or Next.js server-side API routes.
+- TypeScript.
+- REST API.
+- WebSocket for real-time functionality.
+- Background job processing.
+
+Database:
+- PostgreSQL.
+- Prisma ORM.
+- Redis for caching and queues.
+
+Authentication:
+- Neon Auth, Auth.js, or another secure authentication provider.
+- Google authentication.
+- Email/password authentication.
+- Optional GitHub authentication.
+- Role-based access control.
+
+Deployment:
+- Vercel for frontend and supported server-side routes.
+- Render for a separate Node.js backend.
+- Neon or Supabase PostgreSQL.
+- GitHub for source control.
+- Cloudinary or another authorized media storage service.
+
+Testing:
+- Vitest.
+- Jest where appropriate.
+- React Testing Library.
+- Playwright.
+- Cypress where appropriate.
+
+---
+
+# 4. ONLINE API INTEGRATION
+
+Integrate real external APIs.
+
+## Primary APIs
+
+1. TMDB API:
+   https://developer.themoviedb.org/docs
+
+   Use for:
+   - Movies.
+   - TV shows.
+   - Trending titles.
+   - Popular titles.
+   - Top-rated titles.
+   - Movie details.
+   - TV details.
+   - Actors.
+   - Directors.
+   - Cast.
+   - Crew.
+   - Genres.
+   - Keywords.
+   - Movie images.
+   - Posters.
+   - Backdrops.
+   - Recommendations.
+   - Similar movies.
+   - Collections.
+   - Production companies.
+   - Release dates.
+   - Watch providers where available.
+
+2. OMDb API:
+   https://www.omdbapi.com/
+
+   Use for:
+   - Supplementary movie metadata.
+   - IMDb identifiers.
+   - IMDb ratings.
+   - Awards.
+   - Additional movie information.
+   - External movie references.
+
+3. YouTube Data API:
+   https://developers.google.com/youtube/v3
+
+   Use for:
+   - Official trailers.
+   - Teasers.
+   - Interviews.
+   - Behind-the-scenes videos.
+   - Movie clips.
+   - Promotional videos.
+
+4. Watchmode API:
+   https://api.watchmode.com/
+
+   Use for:
+   - Streaming provider discovery.
+   - Availability information.
+   - Provider links.
+   - Rental and purchase availability where supported.
+
+## API integration requirements
+
+- Keep API keys on the server.
+- Use environment variables.
+- Never expose secret keys in frontend JavaScript.
+- Create a reusable API service layer.
+- Validate API responses.
+- Implement caching.
+- Implement pagination.
+- Handle API quotas.
+- Handle API errors.
+- Implement retry mechanisms.
+- Implement request timeouts.
+- Monitor external API availability.
+- Prevent duplicate API requests.
+- Normalize data from different providers.
+- Record API usage.
+- Provide graceful fallback behavior.
+- Display API data attribution.
+- Never fabricate unavailable information.
+- Show when data was last updated.
+- Respect API licenses, quotas, and terms.
+
+---
+
+# 5. COMPLETE 800+ FEATURE REQUIREMENTS
+
+Implement the following feature categories as real application functionality.
+
+## MODULE 1: HOMEPAGE AND NAVIGATION
+
+1. Dynamic hero banners.
+2. Trending movie carousel.
+3. Popular movies.
+4. Top-rated movies.
+5. Upcoming movies.
+6. Now-playing movies.
+7. Recently added movies.
+8. Recommended movies.
+9. Featured TV shows.
+10. Popular TV series.
+11. Movie of the day.
+12. TV show of the day.
+13. Continue watching.
+14. Recently viewed titles.
+15. Personalized homepage.
+16. Genre navigation.
+17. Country navigation.
+18. Language navigation.
+19. Decade navigation.
+20. Advanced navigation menu.
+21. Responsive header.
+22. Sticky navigation.
+23. Mobile navigation.
+24. Footer navigation.
+25. Breadcrumb navigation.
+26. Global search.
+27. Search suggestions.
+28. Search history.
+29. Quick movie preview.
+30. Featured collections.
+31. Editor's picks.
+32. Staff recommendations.
+33. Trending actors.
+34. Trending directors.
+35. Trending franchises.
+36. New trailers.
+37. Popular trailers.
+38. Movie posters.
+39. Backdrop galleries.
+40. Homepage personalization.
+41. Dynamic API loading.
+42. Infinite scrolling.
+43. Pagination.
+44. Skeleton loading.
+45. Lazy-loaded images.
+46. Image fallback handling.
+47. Empty states.
+48. API error messages.
+49. Homepage refresh.
+50. Custom homepage sections.
+
+## MODULE 2: MOVIE DISCOVERY AND DETAILS
+
+51. Search movies by title.
+52. Search by original title.
+53. Search by year.
+54. Search by actor.
+55. Search by director.
+56. Search by genre.
+57. Search by keyword.
+58. Search by language.
+59. Search by country.
+60. Search by production company.
+61. Search by franchise.
+62. Search by collection.
+63. Filter by rating.
+64. Filter by popularity.
+65. Filter by release date.
+66. Filter by runtime.
+67. Filter by certification.
+68. Filter by vote count.
+69. Sort by popularity.
+70. Sort by rating.
+71. Sort by newest.
+72. Sort alphabetically.
+73. Sort by revenue.
+74. Sort by runtime.
+75. Advanced search.
+76. Multi-filter search.
+77. Clear all filters.
+78. Movie detail pages.
+79. Movie synopsis.
+80. Original title.
+81. Tagline display.
+82. Release date.
+83. Runtime.
+84. Genre display.
+85. Language display.
+86. Country display.
+87. Production company details.
+88. Budget information.
+89. Revenue information.
+90. Official website links.
+91. Movie status.
+92. Age certification.
+93. Movie poster gallery.
+94. Backdrop gallery.
+95. Cast list.
+96. Crew list.
+97. Director details.
+98. Writer details.
+99. Producer details.
+100. Cinematographer details.
+101. Editor details.
+102. Music composer details.
+103. Character names.
+104. Cast profile links.
+105. Movie ratings.
+106. Vote counts.
+107. Popularity scores.
+108. IMDb identifiers.
+109. TMDB identifiers.
+110. Similar movies.
+111. Related movies.
+112. Recommended movies.
+113. Movie collections.
+114. Franchise navigation.
+115. Movie keywords.
+116. Filming locations.
+117. Production details.
+118. External references.
+119. Share movie details.
+120. Print movie details.
+
+## MODULE 3: TV SHOWS AND EPISODES
+
+121. TV show discovery.
+122. Popular TV shows.
+123. Trending TV shows.
+124. Top-rated TV shows.
+125. Airing today.
+126. Currently airing shows.
+127. Upcoming episodes.
+128. TV show search.
+129. TV genre filters.
+130. TV network filters.
+131. TV country filters.
+132. TV language filters.
+133. TV rating filters.
+134. TV show details.
+135. TV show synopsis.
+136. TV show posters.
+137. TV show backdrops.
+138. TV show status.
+139. First air date.
+140. Last air date.
+141. Number of seasons.
+142. Number of episodes.
+143. Season details.
+144. Episode details.
+145. Episode synopsis.
+146. Episode runtime.
+147. Episode ratings.
+148. Episode still images.
+149. Episode air dates.
+150. Guest stars.
+151. Season cast.
+152. Season posters.
+153. Season trailers.
+154. TV creators.
+155. TV networks.
+156. Production companies.
+157. Similar TV shows.
+158. Recommended TV shows.
+159. Related TV shows.
+160. TV collections.
+161. TV favorites.
+162. TV watchlist.
+163. TV watch progress.
+164. Season progress.
+165. Episode progress.
+166. Next episode reminders.
+167. Recently watched episodes.
+168. TV show sharing.
+169. TV show search history.
+170. TV show sorting.
+
+## MODULE 4: ACTORS, DIRECTORS AND PEOPLE
+
+171. Actor profiles.
+172. Actress profiles.
+173. Director profiles.
+174. Writer profiles.
+175. Producer profiles.
+176. Celebrity biographies.
+177. Celebrity photographs.
+178. Birth date information.
+179. Birthplace information.
+180. Known-for information.
+181. Filmography.
+182. TV filmography.
+183. Movie credits.
+184. TV credits.
+185. Cast credits.
+186. Crew credits.
+187. Character credits.
+188. Popular actors.
+189. Trending actors.
+190. Popular directors.
+191. Trending directors.
+192. Search people.
+193. Filter by department.
+194. Actor movie timeline.
+195. Actor TV timeline.
+196. Person detail pages.
+197. External links.
+198. Social links.
+199. Known-for titles.
+200. Person images.
+201. Profile sharing.
+202. Actor popularity.
+203. Gender metadata where provided.
+204. Department filtering.
+205. Guest appearances.
+206. Voice acting credits.
+207. Production roles.
+208. Writing credits.
+209. Directing credits.
+210. People pagination.
+211. Follow actors.
+212. Favorite directors.
+213. Favorite celebrities.
+214. Actor recommendations.
+215. Related celebrities.
+
+## MODULE 5: USER ACCOUNTS AND AUTHENTICATION
+
+216. User registration.
+217. Email verification.
+218. User login.
+219. Logout.
+220. Google authentication.
+221. GitHub authentication.
+222. Password reset.
+223. Forgot password.
+224. Change password.
+225. Password strength meter.
+226. Two-factor authentication.
+227. Email OTP.
+228. SMS OTP where supported.
+229. Session management.
+230. Device management.
+231. Active sessions.
+232. Logout all devices.
+233. Account deletion.
+234. Account recovery.
+235. Profile creation.
+236. Profile editing.
+237. Profile picture upload.
+238. Display name.
+239. Username.
+240. Email settings.
+241. Phone settings.
+242. Date of birth field.
+243. Country selection.
+244. Preferred language.
+245. Preferred genres.
+246. Preferred content types.
+247. Privacy settings.
+248. Public profiles.
+249. Private profiles.
+250. Profile sharing.
+251. Account activity history.
+252. Login history.
+253. Login notifications.
+254. Suspicious login detection.
+255. Brute-force protection.
+256. Rate limiting.
+257. CAPTCHA support.
+258. Remember me.
+259. Terms acceptance.
+260. Privacy acceptance.
+261. Account suspension.
+262. Account reactivation.
+263. Role-based permissions.
+264. Administrator role.
+265. Moderator role.
+266. Regular user role.
+267. Premium user role.
+268. Guest browsing.
+269. Guest watchlist using local storage.
+270. Account preferences.
+
+## MODULE 6: WATCHLISTS, FAVORITES AND COLLECTIONS
+
+271. Add movies to watchlist.
+272. Remove movies from watchlist.
+273. Add TV shows to watchlist.
+274. Remove TV shows from watchlist.
+275. Create custom lists.
+276. Edit custom lists.
+277. Delete custom lists.
+278. Public lists.
+279. Private lists.
+280. Share lists.
+281. Collaborative lists.
+282. Favorite movies.
+283. Favorite TV shows.
+284. Favorite actors.
+285. Favorite directors.
+286. Watched movies.
+287. Unwatched movies.
+288. Currently watching.
+289. Watch later.
+290. Completed titles.
+291. Abandoned titles.
+292. Custom categories.
+293. List descriptions.
+294. List cover images.
+295. List sorting.
+296. List filtering.
+297. List search.
+298. List pagination.
+299. Drag-and-drop ordering.
+300. Duplicate detection.
+301. Bulk add titles.
+302. Bulk remove titles.
+303. Export watchlist.
+304. Import watchlist.
+305. Watchlist statistics.
+306. Watchlist sharing.
+307. Public collection discovery.
+308. Community collections.
+309. Collection ratings.
+310. Collection comments.
+311. Collection followers.
+312. Collection privacy.
+313. Collection activity.
+314. Watchlist notifications.
+315. Watchlist synchronization.
+
+## MODULE 7: RATINGS, REVIEWS AND COMMUNITY
+
+316. Rate movies.
+317. Rate TV shows.
+318. Rate episodes.
+319. Write movie reviews.
+320. Write TV reviews.
+321. Edit reviews.
+322. Delete reviews.
+323. Review titles.
+324. Review descriptions.
+325. Spoiler warnings.
+326. Spoiler hiding.
+327. Review likes.
+328. Review dislikes.
+329. Review comments.
+330. Reply to comments.
+331. Report reviews.
+332. Report comments.
+333. Review moderation.
+334. Verified user reviews.
+335. Review sorting.
+336. Newest reviews.
+337. Most helpful reviews.
+338. Highest-rated reviews.
+339. Lowest-rated reviews.
+340. Community ratings.
+341. Average user rating.
+342. Rating distribution.
+343. Rating history.
+344. Rating statistics.
+345. Review pagination.
+346. Review search.
+347. Review filters.
+348. User review profiles.
+349. Review sharing.
+350. Review reactions.
+351. Review notifications.
+352. Community discussions.
+353. Discussion categories.
+354. Create discussion topics.
+355. Reply to discussions.
+356. Discussion likes.
+357. Discussion moderation.
+358. Community guidelines.
+359. Block users.
+360. Mute users.
+361. Follow users.
+362. Followers list.
+363. Following list.
+364. Community activity feed.
+365. Trending discussions.
+366. Community leaderboard.
+367. User reputation.
+368. Helpful reviewer badges.
+369. Community polls.
+370. Movie-versus-movie polls.
+
+## MODULE 8: VIDEO, TRAILERS AND MEDIA
+
+371. Official movie trailers.
+372. Official TV trailers.
+373. Teaser trailers.
+374. Trailer search.
+375. Trailer playback.
+376. YouTube embedding.
+377. Trailer thumbnails.
+378. Video quality selection where supported.
+379. Video captions where available.
+380. Subtitle selection where supported.
+381. Trailer playlists.
+382. Trailer recommendations.
+383. Autoplay controls.
+384. Mute and unmute.
+385. Fullscreen playback.
+386. Picture-in-picture where supported.
+387. Video loading indicators.
+388. Playback error handling.
+389. Trailer language filters.
+390. Trailer release dates.
+391. Trailer channel information.
+392. Trailer sharing.
+393. Trailer bookmarking.
+394. Trailer favorites.
+395. Trailer view counts.
+396. Trailer comments.
+397. Behind-the-scenes videos.
+398. Interviews.
+399. Featurettes.
+400. Movie clips.
+401. TV clips.
+402. Promotional videos.
+403. Official posters.
+404. High-resolution images.
+405. Authorized backdrop downloads.
+406. Gallery slideshow.
+407. Image zoom.
+408. Image carousel.
+409. Image lazy loading.
+410. Image compression.
+411. Responsive image sizing.
+412. Media CDN integration.
+413. Copyright attribution.
+414. Broken media detection.
+415. Media moderation.
+
+## MODULE 9: RECOMMENDATIONS AND PERSONALIZATION
+
+416. Personalized recommendations.
+417. Genre-based recommendations.
+418. Actor-based recommendations.
+419. Director-based recommendations.
+420. Language-based recommendations.
+421. Country-based recommendations.
+422. Popularity-based recommendations.
+423. Rating-based recommendations.
+424. Similar movie recommendations.
+425. Similar TV recommendations.
+426. Trending recommendations.
+427. New release recommendations.
+428. Watchlist recommendations.
+429. History-based recommendations.
+430. Collaborative filtering.
+431. Content-based filtering.
+432. Recommendation explanations.
+433. Recommended-for-you section.
+434. Because-you-watched section.
+435. Because-you-liked section.
+436. Hidden recommendations.
+437. Dislike recommendations.
+438. Recommendation feedback.
+439. Preference onboarding.
+440. Preferred genres.
+441. Preferred actors.
+442. Preferred languages.
+443. Preferred decades.
+444. Preferred countries.
+445. Recommendation refresh.
+446. Recommendation history.
+447. Recommendation exclusions.
+448. Family-friendly recommendations.
+449. Short-film recommendations.
+450. Documentary recommendations.
+451. International recommendations.
+452. African movie recommendations.
+453. Rwandan movie recommendations.
+454. Korean movie recommendations.
+455. Anime recommendations.
+456. Action recommendations.
+457. Comedy recommendations.
+458. Drama recommendations.
+459. Horror recommendations.
+460. Science-fiction recommendations.
+
+## MODULE 10: SEARCH AND DISCOVERY INTELLIGENCE
+
+461. Instant search.
+462. Autocomplete.
+463. Typo correction.
+464. Fuzzy search.
+465. Search synonyms.
+466. Voice search.
+467. Search by image where supported.
+468. Search by TMDB ID.
+469. Search by IMDb ID.
+470. Search by external URL.
+471. Search suggestions.
+472. Popular search terms.
+473. Recent searches.
+474. Clear search history.
+475. Search analytics.
+476. Search ranking.
+477. Search relevance.
+478. Advanced query builder.
+479. Boolean search filters.
+480. Exact title search.
+481. Partial title search.
+482. Multi-language search.
+483. Original language search.
+484. Alternative titles.
+485. Search by cast combination.
+486. Search by director combination.
+487. Search by year range.
+488. Search by rating range.
+489. Search by runtime range.
+490. Search by genre combination.
+491. Search by keywords.
+492. Search by collection.
+493. Search by franchise.
+494. Search by network.
+495. Search by streaming provider.
+496. Saved queries.
+497. Search alerts.
+498. Search result pagination.
+499. Search result caching.
+500. Search error recovery.
+
+## MODULE 11: STREAMING AVAILABILITY AND PROVIDERS
+
+501. Streaming provider discovery.
+502. Provider logos.
+503. Provider country selection.
+504. Netflix availability.
+505. Prime Video availability.
+506. Disney Plus availability.
+507. Apple TV availability.
+508. Showmax availability where supported.
+509. Local provider discovery.
+510. Subscription availability.
+511. Free streaming availability.
+512. Rental availability.
+513. Purchase availability.
+514. Provider filters.
+515. Country-specific providers.
+516. Provider detail pages.
+517. Provider movie catalogs.
+518. Provider TV catalogs.
+519. Provider pricing where available.
+520. Provider external links.
+521. Availability timestamps.
+522. Availability refresh.
+523. Provider comparison.
+524. Provider watch links.
+525. Availability notifications.
+526. Newly available titles.
+527. Leaving-soon titles.
+528. Provider popularity.
+529. Provider favorites.
+530. Provider search.
+531. Provider sorting.
+532. Provider metadata.
+533. Provider region warnings.
+534. Provider attribution.
+535. Provider API integration.
+536. Availability caching.
+537. Availability error handling.
+538. Provider coverage indicators.
+539. Availability history.
+540. Availability disclaimer.
+
+## MODULE 12: ADMIN DASHBOARD
+
+541. Admin login.
+542. Admin dashboard.
+543. Dashboard statistics.
+544. User management.
+545. Create users.
+546. Edit users.
+547. Delete users.
+548. Suspend users.
+549. Restore users.
+550. Role management.
+551. Permission management.
+552. Movie management.
+553. TV show management.
+554. Genre management.
+555. Category management.
+556. Collection management.
+557. Review management.
+558. Comment management.
+559. Report management.
+560. Moderation queue.
+561. Approve reviews.
+562. Reject reviews.
+563. Remove inappropriate content.
+564. Featured content management.
+565. Homepage banner management.
+566. Carousel management.
+567. Announcement management.
+568. Newsletter management.
+569. Notification management.
+570. API configuration.
+571. API key management.
+572. API usage dashboard.
+573. API health monitoring.
+574. API error logs.
+575. API request logs.
+576. Cache management.
+577. Cache clearing.
+578. Database monitoring.
+579. Database backups.
+580. Database restoration.
+581. Audit logs.
+582. Admin activity logs.
+583. Security dashboard.
+584. Failed login monitoring.
+585. Rate limit configuration.
+586. Site settings.
+587. Brand settings.
+588. Logo management.
+589. Theme management.
+590. SEO settings.
+591. Analytics dashboard.
+592. Export reports.
+593. Import data.
+594. Bulk operations.
+595. Admin search.
+
+## MODULE 13: NOTIFICATIONS AND COMMUNICATION
+
+596. In-app notifications.
+597. Email notifications.
+598. Push notifications.
+599. New movie alerts.
+600. Upcoming release alerts.
+601. Trailer release alerts.
+602. New episode alerts.
+603. Watchlist availability alerts.
+604. Review replies.
+605. Comment replies.
+606. New followers.
+607. Collection invitations.
+608. Security notifications.
+609. Login alerts.
+610. Password change alerts.
+611. Notification preferences.
+612. Notification categories.
+613. Mark as read.
+614. Mark all as read.
+615. Delete notifications.
+616. Notification history.
+617. Notification search.
+618. Notification pagination.
+619. Notification badges.
+620. Real-time notifications.
+621. WebSocket notifications.
+622. Email templates.
+623. Welcome emails.
+624. Password reset emails.
+625. Verification emails.
+626. Newsletter subscriptions.
+627. Unsubscribe functionality.
+628. Contact form.
+629. Support tickets.
+630. Help center.
+
+## MODULE 14: SOCIAL SHARING AND INTEGRATION
+
+631. Share movie on Facebook.
+632. Share movie on WhatsApp.
+633. Share movie on X.
+634. Share movie on Telegram.
+635. Share movie on Instagram using supported sharing mechanisms.
+636. Copy movie link.
+637. Share TV show.
+638. Share actor profile.
+639. Share review.
+640. Share watchlist.
+641. Share custom collection.
+642. Social login.
+643. Social profile links.
+644. Open Graph metadata.
+645. Social sharing previews.
+646. QR code generation.
+647. Embed movie cards.
+648. Public profile links.
+649. Public collection links.
+650. Referral system.
+651. Referral tracking.
+652. Invite friends.
+653. Friend discovery.
+654. Friend watchlists.
+655. Friend activity.
+656. Social recommendations.
+657. Community invitations.
+658. External movie links.
+659. Social media analytics.
+660. Share privacy controls.
+
+## MODULE 15: PAYMENTS AND SUBSCRIPTIONS
+
+661. Free membership.
+662. Premium membership.
+663. Subscription plans.
+664. Monthly subscriptions.
+665. Yearly subscriptions.
+666. Subscription comparison.
+667. Subscription checkout.
+668. Stripe integration.
+669. PayPal integration.
+670. Mobile money gateway support.
+671. Rwanda mobile money support through an approved payment provider.
+672. Payment confirmation.
+673. Payment history.
+674. Invoices.
+675. Receipts.
+676. Subscription renewal.
+677. Subscription cancellation.
+678. Upgrade membership.
+679. Downgrade membership.
+680. Free trial.
+681. Trial expiration.
+682. Promo codes.
+683. Discount coupons.
+684. Gift subscriptions.
+685. Subscription notifications.
+686. Payment failure handling.
+687. Refund requests.
+688. Billing profile.
+689. Tax information.
+690. Premium badge.
+691. Premium profile themes.
+692. Ad-free experience.
+693. Subscription admin management.
+694. Revenue reporting.
+
+## MODULE 16: SECURITY AND PRIVACY
+
+695. HTTPS enforcement.
+696. Secure authentication.
+697. Password hashing.
+698. JWT validation.
+699. Refresh token rotation.
+700. Secure cookies.
+701. CSRF protection.
+702. XSS protection.
+703. SQL injection prevention.
+704. Input validation.
+705. Output encoding.
+706. Content Security Policy.
+707. CORS configuration.
+708. API rate limiting.
+709. IP throttling.
+710. Bot protection.
+711. File upload validation.
+712. File size limits.
+713. Malware scanning where supported.
+714. Sensitive data protection.
+715. Environment variables.
+716. Secret management.
+717. Role-based authorization.
+718. Admin route protection.
+719. Database encryption where appropriate.
+720. Secure backups.
+721. Audit logging.
+722. Privacy controls.
+723. Cookie consent.
+724. Data export.
+725. Data deletion requests.
+726. Data retention.
+727. Privacy policy.
+728. Terms and conditions.
+729. Security incident alerts.
+
+## MODULE 17: PERFORMANCE AND RELIABILITY
+
+730. Responsive loading.
+731. Code splitting.
+732. Route-based lazy loading.
+733. Image optimization.
+734. WebP support.
+735. AVIF support.
+736. Lazy image loading.
+737. CDN integration.
+738. API response caching.
+739. Database query optimization.
+740. Database indexing.
+741. Pagination.
+742. Infinite scrolling.
+743. Debounced search.
+744. Request deduplication.
+745. Background refresh.
+746. Retry failed requests.
+747. API timeout handling.
+748. Fallback API providers.
+749. Offline error screen.
+750. Offline favorites cache.
+751. Service worker.
+752. Progressive Web App.
+753. Installable website.
+754. App manifest.
+755. Background synchronization.
+756. Loading skeletons.
+757. Error boundaries.
+758. Global error handling.
+759. Performance monitoring.
+760. Core Web Vitals.
+761. Lighthouse optimization.
+762. Memory leak prevention.
+763. Load testing.
+764. Availability monitoring.
+
+## MODULE 18: UI, UX AND ACCESSIBILITY
+
+765. Modern dark theme.
+766. Light theme.
+767. Theme switcher.
+768. System theme detection.
+769. Responsive desktop layout.
+770. Responsive tablet layout.
+771. Responsive mobile layout.
+772. Accessible color contrast.
+773. Keyboard navigation.
+774. Screen reader support.
+775. ARIA labels.
+776. Semantic HTML.
+777. Focus indicators.
+778. Accessible dialogs.
+779. Accessible dropdowns.
+780. Accessible forms.
+781. Form validation.
+782. Inline error messages.
+783. Success messages.
+784. Toast notifications.
+785. Confirmation dialogs.
+786. Tooltip support.
+787. Dropdown menus.
+788. Mobile bottom navigation.
+789. Sidebar navigation.
+790. Collapsible sidebar.
+791. Movie card hover effects.
+792. Movie card quick view.
+793. Grid view.
+794. List view.
+795. Compact view.
+796. Custom font settings.
+797. Font size settings.
+798. Reduced motion support.
+799. Language switching.
+800. Internationalization.
+801. RTL language support.
+802. Date localization.
+803. Number localization.
+804. Accessibility settings.
+
+## MODULE 19: ANALYTICS, SEO AND API ARCHITECTURE
+
+805. Website visitor analytics.
+806. Unique visitor counts.
+807. Page view tracking.
+808. Movie view analytics.
+809. Search analytics.
+810. Popular movie reports.
+811. Popular TV reports.
+812. Popular genres reports.
+813. Popular actors reports.
+814. User registration reports.
+815. Active user reports.
+816. Watchlist analytics.
+817. Review analytics.
+818. Engagement reports.
+819. Retention reports.
+820. Conversion reports.
+821. Subscription reports.
+822. Revenue analytics.
+823. API usage analytics.
+824. API latency reports.
+825. Error rate reports.
+826. User activity reports.
+827. Geographic analytics.
+828. Device analytics.
+829. Browser analytics.
+830. CSV exports.
+831. PDF exports.
+832. Analytics date filters.
+833. Analytics charts.
+834. Analytics dashboards.
+835. SEO-friendly URLs.
+836. Dynamic page titles.
+837. Meta descriptions.
+838. Canonical URLs.
+839. XML sitemap.
+840. Robots.txt.
+841. Structured data.
+842. Movie schema markup.
+843. Open Graph tags.
+844. Social preview images.
+845. Search engine indexing.
+846. REST API architecture.
+847. API request validation.
+848. API response validation.
+849. Typed API responses.
+850. Environment-based API keys.
+851. Secure API proxy.
+852. Backend movie endpoints.
+853. Backend TV endpoints.
+854. People endpoints.
+855. Search endpoints.
+856. Genre endpoints.
+857. Collection endpoints.
+858. Provider endpoints.
+859. Review endpoints.
+860. User endpoints.
+861. Watchlist endpoints.
+862. Recommendation endpoints.
+863. Authentication endpoints.
+864. Admin endpoints.
+865. API documentation.
+866. OpenAPI specification.
+867. Swagger UI.
+868. API versioning.
+869. API health endpoint.
+870. API status dashboard.
+871. Request logging.
+872. Response logging.
+873. API cache headers.
+874. Pagination metadata.
+875. Consistent error formats.
+876. Rate limit headers.
+877. External API fallbacks.
+878. External API normalization.
+879. Data synchronization.
+880. Scheduled data refresh.
+881. API key rotation.
+882. API quota tracking.
+883. API integration tests.
+884. API contract tests.
+885. Mock API development.
+
+## MODULE 20: DATABASE, TESTING, DEPLOYMENT AND ADVANCED FEATURES
+
+886. User database table.
+887. Profile database table.
+888. Movie cache table.
+889. TV show cache table.
+890. Episode table.
+891. Season table.
+892. Person table.
+893. Genre table.
+894. Production company table.
+895. Provider table.
+896. Watchlist table.
+897. Favorite table.
+898. Review table.
+899. Comment table.
+900. Rating table.
+901. Notification table.
+902. Subscription table.
+903. Payment table.
+904. Collection table.
+905. Collection item table.
+906. Activity table.
+907. Search history table.
+908. Audit log table.
+909. API cache table.
+910. Foreign key constraints.
+911. Database migrations.
+912. Database seeding.
+913. Unique constraints.
+914. Data validation.
+915. Duplicate record prevention.
+916. Soft deletion.
+917. Data archival.
+918. Backup scheduling.
+919. Backup verification.
+920. Database recovery.
+921. Frontend unit tests.
+922. Backend unit tests.
+923. Component tests.
+924. API integration tests.
+925. Authentication tests.
+926. Authorization tests.
+927. Database tests.
+928. Search tests.
+929. Filtering tests.
+930. Watchlist tests.
+931. Review tests.
+932. Payment tests.
+933. Accessibility tests.
+934. Responsive tests.
+935. Cross-browser tests.
+936. End-to-end tests.
+937. Playwright tests.
+938. Cypress tests where appropriate.
+939. Jest tests where appropriate.
+940. Vitest tests.
+941. Test coverage reports.
+942. CI pipeline.
+943. GitHub Actions.
+944. Automated builds.
+945. Automated deployments.
+946. Environment separation.
+947. Development environment.
+948. Preview environment.
+949. Production environment.
+950. Vercel deployment.
+951. Render deployment.
+952. Database hosting.
+953. Domain configuration.
+954. SSL certificate checks.
+955. Production monitoring.
+956. AI movie assistant.
+957. Natural language movie search.
+958. AI recommendation explanations.
+959. Mood-based discovery.
+960. Movie night planner.
+961. Group movie voting.
+962. Shared watchlists.
+963. Watch party planning.
+964. AI-generated collections.
+965. Smart genre discovery.
+966. AI review summarization.
+967. Review sentiment analysis.
+968. Spoiler detection.
+969. Automatic content tagging.
+970. Movie trivia.
+971. Movie quizzes.
+972. Actor trivia.
+973. Release calendar.
+974. Personalized release calendar.
+975. Calendar reminders.
+976. Movie countdowns.
+977. Franchise watch order.
+978. Chronological watch order.
+979. Movie universe timeline.
+980. Movie universe explorer.
+981. Awards tracking.
+982. Oscar winners.
+983. Golden Globe winners.
+984. Film festival tracking.
+985. Box office tracking.
+986. Worldwide box office.
+987. Regional box office.
+988. Movie popularity trends.
+989. Rating trend analysis.
+990. Community predictions.
+991. Prediction leaderboard.
+992. Recommendation challenges.
+993. Daily movie challenge.
+994. Weekly movie challenge.
+995. Movie comparison tool.
+996. Side-by-side movie comparisons.
+997. Movie statistics comparison.
+998. Actor comparison.
+999. Director comparison.
+1000. Genre statistics.
+1001. Personal media diary.
+1002. Year-in-review report.
+1003. Viewing milestones.
+1004. Achievement badges.
+1005. Gamification system.
+
+---
+
+# 6. ADDITIONAL REQUIRED PAGES
+
+Create all of these pages with functional routes:
+
+PUBLIC:
+- Home.
+- Discover.
+- Movies.
+- Movie details.
+- TV shows.
+- TV show details.
+- Seasons.
+- Episodes.
+- Actors.
+- Directors.
+- People profiles.
+- Genres.
+- Collections.
+- Franchises.
+- Trending.
+- Popular.
+- Top rated.
+- Upcoming.
+- Now playing.
+- New releases.
+- Trailers.
+- Streaming providers.
+- Search results.
+- Movie comparison.
+- Release calendar.
+- Awards.
+- Box office.
+- About us.
+- Contact us.
+- FAQ.
+- Help center.
+- Privacy policy.
+- Terms and conditions.
+
+AUTHENTICATED USER:
+- User dashboard.
+- My profile.
+- Edit profile.
+- Watchlist.
+- Favorites.
+- My collections.
+- My reviews.
+- My ratings.
+- Viewing history.
+- Continue watching.
+- Followed actors.
+- Followed directors.
+- Notifications.
+- Friends.
+- Community.
+- Settings.
+- Privacy settings.
+- Security settings.
+- Subscription.
+- Payment history.
+- Personal recommendations.
+- Personal statistics.
+- Viewing diary.
+
+ADMIN:
+- Admin overview.
+- Users.
+- Roles.
+- Permissions.
+- Movies.
+- TV shows.
+- Genres.
+- Collections.
+- Reviews.
+- Comments.
+- Reports.
+- Moderation.
+- Homepage management.
+- Banner management.
+- API management.
+- API monitoring.
+- Database management.
+- Backups.
+- Analytics.
+- Revenue.
+- Payments.
+- Subscriptions.
+- Notifications.
+- Email templates.
+- SEO settings.
+- Site settings.
+- Audit logs.
+- Security monitoring.
+
+---
+
+# 7. PROFESSIONAL UI DESIGN
+
+Create a premium cinematic experience.
+
+Design requirements:
+
+- Professional Netflix-inspired dark interface.
+- Beautiful movie posters.
+- Full-width cinematic hero sections.
+- Large background movie images.
+- Smooth carousels.
+- Hover effects.
+- Interactive movie cards.
+- Responsive grids.
+- Elegant typography.
+- Consistent spacing.
+- Modern icons.
+- Loading skeletons.
+- Professional empty states.
+- Animated transitions.
+- Light and dark themes.
+- Mobile-first layouts.
+
+Suggested colors:
+
+- Primary background: #080B12
+- Secondary background: #111827
+- Card background: #182230
+- Primary accent: #E50914
+- Secondary accent: #F5C518
+- Main text: #FFFFFF
+- Secondary text: #9CA3AF
+
+Do not copy copyrighted brand assets. Create an original brand identity and interface.
+
+---
+
+# 8. DATABASE ARCHITECTURE
+
+Use PostgreSQL with Prisma.
+
+Create normalized database models for:
+
+- User
+- Profile
+- Role
+- Permission
+- Movie
+- TVShow
+- Season
+- Episode
+- Person
+- Genre
+- Keyword
+- ProductionCompany
+- Network
+- StreamingProvider
+- Watchlist
+- WatchlistItem
+- Favorite
+- Collection
+- CollectionItem
+- Review
+- Comment
+- Rating
+- Follow
+- Notification
+- SearchHistory
+- ViewingHistory
+- Subscription
+- Payment
+- Coupon
+- ActivityLog
+- AuditLog
+- APIUsage
+- APICache
+- Report
+- SupportTicket
+- Achievement
+- UserAchievement
+
+Use external TMDB and IMDb identifiers where available.
+
+Avoid storing unnecessary duplicate external data. Implement appropriate cache expiration and synchronization policies.
+
+---
+
+# 9. BACKEND API ARCHITECTURE
+
+Build versioned endpoints.
+
+Example:
+
+/api/v1/auth
+/api/v1/users
+/api/v1/profiles
+/api/v1/movies
+/api/v1/tv
+/api/v1/seasons
+/api/v1/episodes
+/api/v1/people
+/api/v1/genres
+/api/v1/collections
+/api/v1/search
+/api/v1/trailers
+/api/v1/providers
+/api/v1/watchlist
+/api/v1/favorites
+/api/v1/reviews
+/api/v1/ratings
+/api/v1/comments
+/api/v1/recommendations
+/api/v1/notifications
+/api/v1/subscriptions
+/api/v1/payments
+/api/v1/analytics
+/api/v1/admin
+/api/v1/health
+
+Each endpoint must have:
+- Proper HTTP methods.
+- Input validation.
+- Authentication where required.
+- Authorization where required.
+- Consistent response structures.
+- Error handling.
+- Pagination when needed.
+- Logging.
+- Tests.
+
+---
+
+# 10. SECURITY REQUIREMENTS
+
+Implement:
+
+- Secure password hashing.
+- Authentication and authorization.
+- Role-based access control.
+- Secure session cookies.
+- CSRF protection.
+- XSS protection.
+- SQL injection prevention.
+- Rate limiting.
+- CORS restrictions.
+- Input validation.
+- File upload validation.
+- Secure environment variables.
+- API key protection.
+- Admin route protection.
+- Payment webhook verification.
+- Audit logging.
+- Secure database backups.
+- Account deletion and data export.
+- Privacy controls.
+
+Never store plaintext passwords, expose secret API keys, or trust client-side role checks.
+
+---
+
+# 11. TESTING AND QUALITY ASSURANCE
+
+Write tests for:
+
+- Registration.
+- Login.
+- Logout.
+- Password recovery.
+- Movie search.
+- Movie filtering.
+- Movie details.
+- TV details.
+- API integrations.
+- Watchlists.
+- Favorites.
+- Reviews.
+- Ratings.
+- Comments.
+- Notifications.
+- Admin permissions.
+- Database operations.
+- Payments.
+- Responsive interfaces.
+- Accessibility.
+- Error handling.
+
+Run the application and fix errors before declaring modules complete.
+
+---
+
+# 12. DEPLOYMENT
+
+Prepare the application for:
+
+Frontend:
+- Vercel.
+
+Backend:
+- Render.
+
+Database:
+- Neon PostgreSQL or Supabase PostgreSQL.
+
+Repository:
+- GitHub.
+
+Provide:
+- Complete README.
+- Installation instructions.
+- Environment variable documentation.
+- Database setup.
+- Migration commands.
+- Development commands.
+- Production build commands.
+- Deployment configuration.
+- API documentation.
+- Testing instructions.
+- Troubleshooting guide.
+
+Create a safe .env.example with placeholder values only.
+
+Never commit .env files or real API secrets.
+
+---
+
+# 13. DEVELOPMENT EXECUTION PLAN
+
+Build the application in phases.
+
+PHASE 1: Inspect existing repository and plan architecture.
+
+PHASE 2: Create project structure, dependencies, design system, and shared components.
+
+PHASE 3: Implement database schema, migrations, and authentication.
+
+PHASE 4: Implement TMDB API integration and movie discovery.
+
+PHASE 5: Implement TV shows, episodes, actors, directors, and people.
+
+PHASE 6: Implement search, filters, sorting, and pagination.
+
+PHASE 7: Implement watchlists, favorites, ratings, and reviews.
+
+PHASE 8: Implement trailers, streaming availability, and media galleries.
+
+PHASE 9: Implement personalized recommendations and user dashboards.
+
+PHASE 10: Implement community and social features.
+
+PHASE 11: Implement admin dashboard and moderation.
+
+PHASE 12: Implement notifications, payments, and subscriptions.
+
+PHASE 13: Implement analytics, SEO, and performance optimization.
+
+PHASE 14: Implement security, testing, monitoring, and backups.
+
+PHASE 15: Deploy to production.
+
+PHASE 16: Audit every requirement in the 1005-item feature list.
+
+---
+
+# 14. STRICT DEVELOPMENT RULES
+
+1. Do not create a static-only website.
+2. Do not replace API integrations with hardcoded movie arrays.
+3. Do not create fake ratings or fabricated streaming availability.
+4. Do not leave buttons without working functionality.
+5. Do not leave routes broken.
+6. Do not leave forms without validation.
+7. Do not expose secret keys.
+8. Do not skip database persistence.
+9. Do not use localStorage as the permanent database for authenticated users.
+10. Do not create an unprotected admin dashboard.
+11. Do not implement fake payment processing.
+12. Do not claim unimplemented features are completed.
+13. Do not delete working existing code without justification.
+14. Do not generate thousands of duplicate components.
+15. Use reusable architecture and clean code.
+16. Maintain TypeScript types.
+17. Follow API terms and copyright requirements.
+18. Use licensed or authorized video playback only.
+19. Build and test every module.
+20. Keep the website fast, secure, accessible, and responsive.
+
+---
+
+# 15. FINAL ACCEPTANCE CRITERIA
+
+The application is only considered complete when:
+
+- All required pages exist.
+- All implemented features work.
+- TMDB integration successfully retrieves real movie data.
+- OMDb integration works when configured.
+- YouTube trailers work through permitted embedding.
+- Search and filtering work.
+- User authentication works.
+- Database operations work.
+- Watchlists persist.
+- Reviews and ratings persist.
+- Recommendations work.
+- Admin permissions are enforced.
+- Mobile and desktop layouts work.
+- API errors are handled correctly.
+- Security tests pass.
+- Automated tests pass.
+- Production build succeeds.
+- Deployment succeeds.
+- Documentation is complete.
+
+Create a feature audit report with these statuses:
+
+- COMPLETED
+- PARTIALLY COMPLETED
+- NOT IMPLEMENTED
+- BLOCKED BY EXTERNAL API
+- REQUIRES PAID PROVIDER
+
+Never mark a requirement COMPLETED simply because a UI element exists.
+
+For every feature, identify its page, component, backend endpoint, database model if needed, and test coverage.
+
+FINAL OBJECTIVE:
+
+Deliver a professional, scalable, secure, fully functional international movie discovery and entertainment platform with all 1005 listed feature requirements implemented and tested.
+
+Start by inspecting my existing repository. Then explain the architecture and begin implementation. Do not stop after generating a plan or a homepage. Continue module by module until the application is fully implemented, tested, and ready for deployment.

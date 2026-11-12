@@ -1,0 +1,44 @@
+{
+  "name": "CineVerse — Movie Discovery Platform",
+  "short_name": "CineVerse",
+  "description": "Discover movies and TV shows from around the world. Build watchlists, rate titles, and join a community of cinephiles.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#080B12",
+  "theme_color": "#080B12",
+  "orientation": "portrait-primary",
+  "categories": ["entertainment", "lifestyle"],
+  "lang": "en",
+  "dir": "ltr",
+  "scope": "/",
+  "icons": [
+    {
+      "src": "/logo.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Discover",
+      "short_name": "Discover",
+      "description": "Browse and filter movies and TV shows",
+      "url": "/?view=discover"
+    },
+    {
+      "name": "Trending",
+      "short_name": "Trending",
+      "description": "See what's trending this week",
+      "url": "/?view=trending"
+    },
+    {
+      "name": "My Watchlist",
+      "short_name": "Watchlist",
+      "description": "Your saved titles",
+      "url": "/?view=watchlist"
+    }
+  ],
+  "screenshots": [],
+  "prefer_related_applications": false
+}

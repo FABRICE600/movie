@@ -7,11 +7,12 @@ import { useAuthStore } from "@/store/auth-store";
 import { MovieGrid, MovieGridSkeleton } from "@/components/site/movie-card";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
-import { Bookmark, Heart, Star, LogIn, Trash2, Bell, Check, BellOff } from "lucide-react";
+import { Bookmark, Heart, Star, LogIn, Trash2, Bell, Check, BellOff, Clock, Users, Settings, Trophy, Lock } from "lucide-react";
 import { toast } from "sonner";
 import { useState } from "react";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
+import { Card, CardContent } from "@/components/ui/card";
 
 export function WatchlistView() {
   const user = useAuthStore((s) => s.user);
@@ -345,6 +346,7 @@ export function ProfileView() {
           <TabsTrigger value="overview">Overview</TabsTrigger>
           <TabsTrigger value="ratings">My ratings</TabsTrigger>
           <TabsTrigger value="reviews">My reviews</TabsTrigger>
+          <TabsTrigger value="achievements">Achievements</TabsTrigger>
           <TabsTrigger value="notifications">
             Notifications {notifsQuery.data?.unread > 0 && <Badge variant="default" className="ml-1 text-[10px]">{notifsQuery.data.unread}</Badge>}
           </TabsTrigger>
@@ -366,6 +368,25 @@ export function ProfileView() {
             <div className="text-2xl font-bold">View list</div>
             <div className="text-xs text-muted-foreground">Watchlist</div>
           </button>
+          <button onClick={() => navigate("history")} className="text-left p-4 rounded-lg bg-card border border-border">
+            <Clock className="h-5 w-5 text-primary mb-2" />
+            <div className="text-2xl font-bold">History</div>
+            <div className="text-xs text-muted-foreground">Viewing & search</div>
+          </button>
+          <button onClick={() => navigate("social")} className="text-left p-4 rounded-lg bg-card border border-border">
+            <Users className="h-5 w-5 text-primary mb-2" />
+            <div className="text-2xl font-bold">Social</div>
+            <div className="text-xs text-muted-foreground">Followers & following</div>
+          </button>
+          <button onClick={() => navigate("settings")} className="text-left p-4 rounded-lg bg-card border border-border">
+            <Settings className="h-5 w-5 text-primary mb-2" />
+            <div className="text-2xl font-bold">Settings</div>
+            <div className="text-xs text-muted-foreground">Account & privacy</div>
+          </button>
+        </TabsContent>
+
+        <TabsContent value="achievements" className="mt-4">
+          <AchievementsPanel />
         </TabsContent>
 
         <TabsContent value="ratings" className="mt-4 space-y-2">
@@ -447,6 +468,110 @@ export function ProfileView() {
           ))}
         </TabsContent>
       </Tabs>
+    </div>
+  );
+}
+
+function AchievementsPanel() {
+  const query = useQuery({
+    queryKey: ["achievements"],
+    queryFn: async () => {
+      const res = await fetch("/api/achievements");
+      if (!res.ok) return { achievements: [], earnedCount: 0, totalCount: 0 };
+      return res.json();
+    },
+  });
+
+  const achievements: {
+    id: string; slug: string; name: string; description: string; icon: string; tier: string;
+    earned: boolean; earnedAt: string | null;
+  }[] = query.data?.achievements ?? [];
+
+  if (query.isLoading) {
+    return <div className="text-sm text-muted-foreground">Loading achievements...</div>;
+  }
+
+  if (achievements.length === 0) {
+    return (
+      <Card className="bg-card border-dashed border-border">
+        <CardContent className="p-8 text-center text-sm text-muted-foreground">
+          <Trophy className="h-8 w-8 mx-auto mb-2 opacity-50" />
+          No achievements available yet. Earn them by watching, rating, reviewing, and engaging with the community.
+        </CardContent>
+      </Card>
+    );
+  }
+
+  const tierColors: Record<string, string> = {
+    BRONZE: "from-orange-700/30 to-orange-900/10 border-orange-700/40 text-orange-400",
+    SILVER: "from-slate-400/30 to-slate-700/10 border-slate-400/40 text-slate-300",
+    GOLD: "from-yellow-500/30 to-yellow-700/10 border-yellow-500/40 text-yellow-400",
+    PLATINUM: "from-cyan-400/30 to-blue-700/10 border-cyan-400/40 text-cyan-300",
+  };
+
+  const earned = achievements.filter((a) => a.earned);
+  const locked = achievements.filter((a) => !a.earned);
+
+  return (
+    <div className="space-y-5">
+      <div className="bg-card border border-border rounded-lg p-4 flex items-center gap-4">
+        <div className="h-12 w-12 rounded-full bg-gradient-to-br from-yellow-500/20 to-yellow-700/10 flex items-center justify-center">
+          <Trophy className="h-6 w-6 text-yellow-500" />
+        </div>
+        <div>
+          <p className="text-2xl font-bold">{earned.length} / {achievements.length}</p>
+          <p className="text-xs text-muted-foreground">Achievements earned</p>
+        </div>
+      </div>
+
+      {earned.length > 0 && (
+        <div className="space-y-3">
+          <h3 className="text-sm font-bold text-muted-foreground uppercase tracking-wide">Earned</h3>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+            {earned.map((a) => (
+              <Card key={a.id} className={`bg-gradient-to-br ${tierColors[a.tier] ?? tierColors.BRONZE} border-2`}>
+                <CardContent className="p-4">
+                  <div className="flex items-start gap-3">
+                    <Trophy className="h-8 w-8 shrink-0" />
+                    <div className="min-w-0">
+                      <p className="font-bold text-sm">{a.name}</p>
+                      <p className="text-xs text-muted-foreground mt-0.5">{a.description}</p>
+                      <Badge variant="secondary" className="text-[10px] mt-2">{a.tier}</Badge>
+                      {a.earnedAt && (
+                        <p className="text-[10px] text-muted-foreground mt-1">
+                          Earned {new Date(a.earnedAt).toLocaleDateString()}
+                        </p>
+                      )}
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {locked.length > 0 && (
+        <div className="space-y-3">
+          <h3 className="text-sm font-bold text-muted-foreground uppercase tracking-wide">Locked ({locked.length})</h3>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 opacity-60">
+            {locked.map((a) => (
+              <Card key={a.id} className="bg-card border-border border-dashed">
+                <CardContent className="p-4">
+                  <div className="flex items-start gap-3">
+                    <Lock className="h-8 w-8 shrink-0 text-muted-foreground" />
+                    <div className="min-w-0">
+                      <p className="font-bold text-sm">{a.name}</p>
+                      <p className="text-xs text-muted-foreground mt-0.5">{a.description}</p>
+                      <Badge variant="outline" className="text-[10px] mt-2">{a.tier}</Badge>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 }

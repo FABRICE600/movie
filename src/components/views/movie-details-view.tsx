@@ -367,6 +367,9 @@ function DetailsContent({ item, similar, recommendations }: { item: MediaItem; s
           <Tabs defaultValue="cast">
             <TabsList className="flex-wrap h-auto">
               <TabsTrigger value="cast">Cast & Crew</TabsTrigger>
+              {item.mediaType === "TV" && item.seasons && (
+                <TabsTrigger value="seasons">Seasons & Episodes</TabsTrigger>
+              )}
               <TabsTrigger value="media">Media</TabsTrigger>
               <TabsTrigger value="providers">Where to Watch</TabsTrigger>
               <TabsTrigger value="reviews">
@@ -445,6 +448,12 @@ function DetailsContent({ item, similar, recommendations }: { item: MediaItem; s
                 </div>
               </div>
             </TabsContent>
+
+            {item.mediaType === "TV" && item.seasons && (
+              <TabsContent value="seasons" className="mt-4">
+                <SeasonsTab tvId={item.id} seasonCount={item.seasons} episodeCount={item.episodes ?? seasonCount * 10} />
+              </TabsContent>
+            )}
 
             <TabsContent value="providers" className="mt-4">
               <div className="bg-card border border-border rounded-lg p-4">
@@ -727,3 +736,41 @@ const PEOPLE_FROM_MEDIA = [...MOVIES, ...TV_SHOWS]
   .flatMap((m) => [...m.cast, ...m.crew])
   .map((c) => findPersonByName(c.name))
   .filter(Boolean) as { id: number; name: string }[];
+
+function SeasonsTab({ tvId, seasonCount, episodeCount }: { tvId: number; seasonCount: number; episodeCount: number }) {
+  const navigate = useAppStore((s) => s.navigate);
+  const epsPerSeason = Math.max(1, Math.floor(episodeCount / Math.max(1, seasonCount)));
+
+  return (
+    <div className="space-y-4">
+      <div className="bg-card border border-border rounded-lg p-4">
+        <h3 className="text-sm font-semibold mb-1">{seasonCount} season{seasonCount > 1 ? "s" : ""} · {episodeCount} episode{episodeCount > 1 ? "s" : ""} total</h3>
+        <p className="text-xs text-muted-foreground">
+          Click any season to see full episode lists, synopses, runtime, ratings, and guest stars.
+        </p>
+      </div>
+      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+        {Array.from({ length: seasonCount }).map((_, i) => {
+          const seasonNumber = i + 1;
+          return (
+            <button
+              key={seasonNumber}
+              onClick={() => navigate("season", { tvId, seasonNumber })}
+              className="text-left bg-card border border-border hover:border-primary/50 transition-colors rounded-lg p-4 group"
+            >
+              <div className="flex items-center justify-between mb-2">
+                <Badge variant="secondary">Season {seasonNumber}</Badge>
+                <Play className="h-4 w-4 text-muted-foreground group-hover:text-primary transition-colors" />
+              </div>
+              <p className="font-bold text-sm">Season {seasonNumber}</p>
+              <p className="text-xs text-muted-foreground mt-1">
+                {epsPerSeason} episode{epsPerSeason > 1 ? "s" : ""} · ~{epsPerSeason * 45} min total
+              </p>
+              <p className="text-xs text-primary mt-2 group-hover:underline">View episodes →</p>
+            </button>
+          );
+        })}
+      </div>
+    </div>
+  );
+}

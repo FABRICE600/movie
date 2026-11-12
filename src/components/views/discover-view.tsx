@@ -194,6 +194,39 @@ export function DiscoverView() {
             </div>
 
             <div className="space-y-2">
+              <Label className="text-xs uppercase tracking-wide text-muted-foreground">Decade</Label>
+              <div className="flex flex-wrap gap-1">
+                {[
+                  { label: "All", value: null },
+                  { label: "Pre-1980", value: "pre-1980" },
+                  { label: "80s", value: "1980" },
+                  { label: "90s", value: "1990" },
+                  { label: "2000s", value: "2000" },
+                  { label: "2010s", value: "2010" },
+                  { label: "2020s", value: "2020" },
+                ].map((d) => (
+                  <button
+                    key={d.label}
+                    onClick={() => {
+                      if (d.value === null) {
+                        setYearRange([1920, 2025]);
+                      } else if (d.value === "pre-1980") {
+                        setYearRange([1920, 1979]);
+                      } else {
+                        const start = parseInt(d.value);
+                        setYearRange([start, start + 9]);
+                      }
+                      setPage(1);
+                    }}
+                    className="text-xs px-2 py-1 rounded-full border border-border hover:bg-muted transition-colors"
+                  >
+                    {d.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div className="space-y-2">
               <Label className="text-xs uppercase tracking-wide text-muted-foreground">Sort by</Label>
               <Select value={sortBy} onValueChange={(v) => { setSortBy(v); setPage(1); }}>
                 <SelectTrigger><SelectValue /></SelectTrigger>

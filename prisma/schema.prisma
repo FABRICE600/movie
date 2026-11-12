@@ -38,6 +38,15 @@ model User {
   supportTickets SupportTicket[]
   viewingHistory ViewingHistory[]
   searchHistory SearchHistory[]
+  discussionThreads DiscussionThread[]
+  discussionReplies DiscussionReply[]
+  threadLikes   ThreadLike[]
+  replyLikes    ReplyLike[]
+  passwordResets PasswordReset[]
+  oauthAccounts OAuthAccount[]
+  // Social graph (self-relation through Follow)
+  followers     Follow[] @relation("Followee")
+  following     Follow[] @relation("Follower")
 }
 
 model Session {
@@ -237,6 +246,8 @@ model Follow {
   followerId  String
   followeeId  String
   createdAt   DateTime @default(now())
+  follower    User     @relation("Follower", fields: [followerId], references: [id], onDelete: Cascade)
+  followee    User     @relation("Followee", fields: [followeeId], references: [id], onDelete: Cascade)
 
   @@unique([followerId, followeeId])
   @@index([followeeId])
@@ -318,4 +329,102 @@ model ViewingHistory {
 
   @@index([userId])
   @@index([tmdbId, mediaType])
+}
+
+model DiscussionCategory {
+  id          String   @id @default(cuid())
+  slug        String   @unique
+  name        String
+  description String?
+  color       String   @default("#E50914")
+  sortOrder   Int      @default(0)
+  createdAt   DateTime @default(now())
+
+  threads     DiscussionThread[]
+}
+
+model DiscussionThread {
+  id          String   @id @default(cuid())
+  categoryId  String
+  userId      String
+  title       String
+  body        String
+  views       Int      @default(0)
+  pinned      Boolean  @default(false)
+  locked      Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  category    DiscussionCategory @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  replies     DiscussionReply[]
+  likes       ThreadLike[]
+
+  @@index([categoryId])
+  @@index([userId])
+  @@index([createdAt])
+}
+
+model DiscussionReply {
+  id          String   @id @default(cuid())
+  threadId    String
+  userId      String
+  body        String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  thread      DiscussionThread @relation(fields: [threadId], references: [id], onDelete: Cascade)
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  likes       ReplyLike[]
+
+  @@index([threadId])
+  @@index([userId])
+}
+
+model ThreadLike {
+  id          String   @id @default(cuid())
+  threadId    String
+  userId      String
+  createdAt   DateTime @default(now())
+
+  thread      DiscussionThread @relation(fields: [threadId], references: [id], onDelete: Cascade)
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([threadId, userId])
+}
+
+model ReplyLike {
+  id          String   @id @default(cuid())
+  replyId     String
+  userId      String
+  createdAt   DateTime @default(now())
+
+  reply       DiscussionReply @relation(fields: [replyId], references: [id], onDelete: Cascade)
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([replyId, userId])
+}
+
+model PasswordReset {
+  id          String   @id @default(cuid())
+  userId      String
+  token       String   @unique
+  expiresAt   DateTime
+  used        Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}
+
+model OAuthAccount {
+  id          String   @id @default(cuid())
+  userId      String
+  provider    String   // GOOGLE | GITHUB
+  providerAccountId String
+  createdAt   DateTime @default(now())
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+  @@index([userId])
 }

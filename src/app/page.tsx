@@ -29,6 +29,11 @@ import { HelpView } from "@/components/views/help-view";
 import { TriviaView } from "@/components/views/trivia-view";
 import { YearReviewView } from "@/components/views/year-review-view";
 import { FranchisesView } from "@/components/views/franchises-view";
+import { CommunityView } from "@/components/views/community-view";
+import { SocialView } from "@/components/views/social-view";
+import { SeasonDetailView } from "@/components/views/season-view";
+import { HistoryView } from "@/components/views/history-view";
+import { MobileBottomNav } from "@/components/site/mobile-bottom-nav";
 
 export default function Home() {
   const view = useAppStore((s) => s.view);
@@ -38,12 +43,13 @@ export default function Home() {
     <div className="flex min-h-screen flex-col bg-background text-foreground">
       <Navbar />
 
-      <main className="flex-1">
+      <main className="flex-1 pb-14 md:pb-0">
         <CurrentView view={view} navigate={navigate} />
       </main>
 
       <Footer />
       <AuthDialog />
+      <MobileBottomNav />
     </div>
   );
 }
@@ -124,6 +130,15 @@ function CurrentView({ view, navigate }: { view: string; navigate: any }) {
       return <YearReviewView />;
     case "franchises":
       return <FranchisesView />;
+    case "community":
+      return <CommunityView />;
+    case "social":
+      return <SocialView />;
+    case "season":
+    case "episode":
+      return <SeasonDetailView />;
+    case "history":
+      return <HistoryView />;
     default:
       return <HomeView />;
   }

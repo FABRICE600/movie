@@ -12,3 +12,16 @@ Allow: /
 
 User-agent: *
 Allow: /
+
+# Sitemap
+Sitemap: https://cineverse.example.com/sitemap.xml
+
+# Block API endpoints from indexing
+Disallow: /api/
+
+# Allow OpenGraph crawlers full access
+User-agent: FacebookExternalHit/1.1
+Allow: /
+
+User-agent: Twitterbot/1.0
+Allow: /

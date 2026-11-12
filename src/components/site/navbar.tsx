@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Search, Menu, X, Sun, Moon, Bell, Film, LogOut, User, LayoutDashboard, Heart, Bookmark, ChevronDown } from "lucide-react";
+import { Search, Menu, X, Sun, Moon, Bell, Film, LogOut, User, LayoutDashboard, Heart, Bookmark, ChevronDown, Clock, MessageSquare, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
@@ -46,6 +46,9 @@ const NAV_ITEMS: NavItem[] = [
   { label: "AI Assistant", view: "ai-assistant" },
   { label: "Trivia", view: "trivia" },
   { label: "Year in Review", view: "year-review" },
+  { label: "Community", view: "community" },
+  { label: "Social", view: "social" },
+  { label: "History", view: "history" },
   { label: "About", view: "about" },
 ];
 
@@ -145,7 +148,7 @@ export function Navbar() {
               <DropdownMenuTrigger asChild>
                 <button
                   className={`px-3 py-2 text-sm font-medium rounded-md transition-colors flex items-center gap-1 ${
-                    ["box-office","awards","calendar","collections","providers","trailers","franchises","compare","ai-assistant","trivia","year-review","about"].includes(view)
+                    ["box-office","awards","calendar","collections","providers","trailers","franchises","compare","ai-assistant","trivia","year-review","community","social","history","about"].includes(view)
                       ? "text-foreground bg-muted"
                       : "text-muted-foreground hover:text-foreground hover:bg-muted/60"
                   }`}
@@ -247,6 +250,15 @@ export function Navbar() {
                   <DropdownMenuItem onClick={() => navigate("favorites")}>
                     <Heart className="mr-2 h-4 w-4" /> Favorites
                   </DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => navigate("history")}>
+                    <Clock className="mr-2 h-4 w-4" /> Activity History
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => navigate("community")}>
+                    <MessageSquare className="mr-2 h-4 w-4" /> Community
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => navigate("social")}>
+                    <Users className="mr-2 h-4 w-4" /> Social
+                  </DropdownMenuItem>
                   {(user.role === "ADMIN" || user.role === "MODERATOR") && (
                     <>
                       <DropdownMenuSeparator />
@@ -314,6 +326,18 @@ export function Navbar() {
                       </button>
                       <button onClick={() => navigate("profile")} className="text-left px-3 py-2.5 rounded-md text-sm hover:bg-muted/60 flex items-center gap-2">
                         <User className="h-4 w-4" /> Profile
+                      </button>
+                      <button onClick={() => navigate("history")} className="text-left px-3 py-2.5 rounded-md text-sm hover:bg-muted/60 flex items-center gap-2">
+                        <Clock className="h-4 w-4" /> Activity History
+                      </button>
+                      <button onClick={() => navigate("community")} className="text-left px-3 py-2.5 rounded-md text-sm hover:bg-muted/60 flex items-center gap-2">
+                        <MessageSquare className="h-4 w-4" /> Community
+                      </button>
+                      <button onClick={() => navigate("social")} className="text-left px-3 py-2.5 rounded-md text-sm hover:bg-muted/60 flex items-center gap-2">
+                        <Users className="h-4 w-4" /> Social
+                      </button>
+                      <button onClick={() => navigate("settings")} className="text-left px-3 py-2.5 rounded-md text-sm hover:bg-muted/60 flex items-center gap-2">
+                        <LayoutDashboard className="h-4 w-4" /> Settings
                       </button>
                       {(user.role === "ADMIN" || user.role === "MODERATOR") && (
                         <button onClick={() => navigate("admin")} className="text-left px-3 py-2.5 rounded-md text-sm hover:bg-muted/60 flex items-center gap-2">

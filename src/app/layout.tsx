@@ -10,7 +10,10 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "CineVerse — Discover Movies & TV",
+  title: {
+    default: "CineVerse — Discover Movies & TV",
+    template: "%s · CineVerse",
+  },
   description:
     "CineVerse is a modern movie and TV discovery platform with real-time data, personalized recommendations, watchlists, reviews, and a vibrant community.",
   keywords: [
@@ -23,19 +26,59 @@ export const metadata: Metadata = {
     "tmdb",
     "cinema",
     "CineVerse",
+    "African cinema",
+    "Nollywood",
+    "Korean drama",
+    "anime",
   ],
   authors: [{ name: "CineVerse Team" }],
+  manifest: "/manifest.json",
+  applicationName: "CineVerse",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "black-translucent",
+    title: "CineVerse",
+  },
+  formatDetection: {
+    telephone: false,
+    address: false,
+    email: false,
+  },
   openGraph: {
     title: "CineVerse — Discover Movies & TV",
     description: "A modern movie and TV discovery platform.",
     siteName: "CineVerse",
     type: "website",
+    locale: "en_US",
+    images: [
+      {
+        url: "/logo.svg",
+        width: 512,
+        height: 512,
+        alt: "CineVerse",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "CineVerse",
     description: "A modern movie and TV discovery platform.",
+    images: ["/logo.svg"],
   },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  alternates: {
+    canonical: "/",
+  },
+  category: "entertainment",
 };
 
 export default function RootLayout({

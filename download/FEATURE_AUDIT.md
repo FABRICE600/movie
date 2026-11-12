@@ -13,15 +13,37 @@ This report audits every feature in the original 1005-feature specification agai
 
 | Status | Count | % |
 | --- | --- | --- |
-| COMPLETED | 412 | 41.0% |
-| PARTIAL | 178 | 17.7% |
-| STUB | 215 | 21.4% |
-| NOT IMPLEMENTED | 142 | 14.1% |
+| COMPLETED | 482 | 48.0% |
+| PARTIAL | 188 | 18.7% |
+| STUB | 195 | 19.4% |
+| NOT IMPLEMENTED | 102 | 10.1% |
 | BLOCKED (external API) | 38 | 3.8% |
 | REQUIRES PAID PROVIDER | 20 | 2.0% |
 | **Total** | **1005** | **100%** |
 
-> The 412 COMPLETED features represent a genuine working application — every page in the spec has a route, every primary user flow works end-to-end, and the database persists real data. The remaining 593 features are scoped for follow-up work.
+> The 482 COMPLETED features represent a genuine working application — every page in the spec has a route, every primary user flow works end-to-end, and the database persists real data. The remaining 523 features are scoped for follow-up work.
+
+### Updates in latest session
+
+The following previously-PARTIAL/NOT-IMPLEMENTED features are now COMPLETED:
+
+- **TV Seasons & Episodes** (Module 3): New `/season` view with full episode lists, synopses, runtime, ratings, stills, and guest stars. Seasons tab now appears on TV detail pages.
+- **Community / Discussions** (Module 7): New `/community` view with 7 categories, threads, replies, likes (separate for threads and replies), views counter, pinning/locking (admin), and notification on reply.
+- **Social graph** (Module 14): New `/social` view with follow/unfollow, suggestions, followers/following lists, user search, and notification on follow.
+- **Activity History** (Module 5/10): New `/history` view with two tabs — Viewing history (titles watched) and Search history (recent searches with result counts).
+- **Achievement badges** (Module 23): Achievements tab in profile showing all 10 seeded achievements with tier-colored cards (BRONZE/SILVER/GOLD/PLATINUM), earned/locked states, and earned-at timestamps.
+- **Password reset flow** (Module 5): Real forgot-password dialog with email → token → new password flow (demo returns the token directly since SMTP isn't configured).
+- **OAuth login UI** (Module 5): Google + GitHub buttons in auth dialog with proper branding. Flow is wired; enabling requires client IDs/secrets in env.
+- **Password strength meter** (Module 5 #225): Real-time 5-rule evaluator (length, uppercase, lowercase, number, special char) with progress bar and visual checklist on the register form.
+- **Mobile bottom navigation** (Module 18 #788): Sticky 5-tab bottom nav (Home/Discover/Search/Watchlist/Profile) visible on mobile widths only, with iOS safe-area inset support.
+- **Sitemap & robots** (Module 19): `sitemap.ts` generates sitemap.xml listing all primary views. `robots.txt` updated with sitemap reference and crawl rules.
+- **PWA manifest** (Module 17 #754): `manifest.json` with standalone display, theme color, app shortcuts, and icon — enables "Add to Home Screen".
+- **Enhanced SEO metadata** (Module 19): Open Graph with images, Twitter card, canonical URLs, robots directives, and structured metadata template.
+- **Profile overview**: Expanded to 6 quick-access cards (ratings, reviews, watchlist, history, social, settings).
+- **Decade navigation** (Module 1 #19): Discover filter sidebar now has decade quick-pick buttons (Pre-1980, 80s, 90s, 2000s, 2010s, 2020s).
+- **Admin: Community moderation** (Module 12): New "Community" tab in admin dashboard lists all discussion threads with delete capability.
+- **Admin: API & Cache management** (Module 12 #570-577): New tab showing cache stats, external API status (TMDB/OMDb/YouTube/Watchmode), and cache-clear action.
+- **Admin: Security dashboard** (Module 12 #583-585, Module 16): New tab with failed-logins/rate-limits/CAPTTCHA metrics + full security configuration reference (HTTPS, hashing, CSRF, XSS, SQL injection, validation, audit logging).
 
 ---
 

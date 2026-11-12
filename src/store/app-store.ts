@@ -40,7 +40,12 @@ export type ViewName =
   | "contact"
   | "trivia"
   | "year-review"
-  | "franchises";
+  | "franchises"
+  | "community"
+  | "social"
+  | "season"
+  | "episode"
+  | "history";
 
 interface ViewState {
   view: ViewName;

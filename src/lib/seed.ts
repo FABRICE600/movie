@@ -105,6 +105,41 @@ export async function ensureSeed() {
         ],
       });
     }
+
+    // Seed discussion categories
+    const categoryCount = await db.discussionCategory.count();
+    if (categoryCount === 0) {
+      const categories = await db.discussionCategory.createMany({
+        data: [
+          { slug: "general", name: "General Discussion", description: "Talk about anything movie-related.", color: "#E50914", sortOrder: 1 },
+          { slug: "movie-reviews", name: "Movie Reviews", description: "In-depth reviews beyond our title pages.", color: "#F5C518", sortOrder: 2 },
+          { slug: "tv-talk", name: "TV Talk", description: "Episode discussions, season arcs, predictions.", color: "#3B82F6", sortOrder: 3 },
+          { slug: "recommendations", name: "Recommendations", description: "Ask for and share recommendations.", color: "#10B981", sortOrder: 4 },
+          { slug: "news-rumors", name: "News & Rumors", description: "Industry news, casting, release dates.", color: "#A855F7", sortOrder: 5 },
+          { slug: "international", name: "International Cinema", description: "World cinema — Nollywood, K-drama, anime, arthouse.", color: "#EC4899", sortOrder: 6 },
+          { slug: "off-topic", name: "Off-Topic Lounge", description: "Anything not strictly movies.", color: "#6B7280", sortOrder: 7 },
+        ],
+      });
+    }
+
+    // Seed achievements
+    const achievementCount = await db.achievement.count();
+    if (achievementCount === 0) {
+      await db.achievement.createMany({
+        data: [
+          { slug: "first-watchlist", name: "First Watch", description: "Added your first title to a watchlist.", icon: "Bookmark", tier: "BRONZE" },
+          { slug: "ten-titles", name: "Collector", description: "Saved 10 titles to your watchlist.", icon: "Layers", tier: "BRONZE" },
+          { slug: "fifty-titles", name: "Archivist", description: "Saved 50 titles to your watchlist.", icon: "Archive", tier: "SILVER" },
+          { slug: "first-review", name: "Critic", description: "Wrote your first review.", icon: "PenLine", tier: "BRONZE" },
+          { slug: "ten-reviews", name: "Prolific Critic", description: "Wrote 10 reviews.", icon: "PenTool", tier: "SILVER" },
+          { slug: "first-rating", name: "Rater", description: "Rated your first title.", icon: "Star", tier: "BRONZE" },
+          { slug: "perfect-score", name: "Perfect Score", description: "Got a perfect 10/10 rating on a quiz.", icon: "Trophy", tier: "GOLD" },
+          { slug: "premium-member", name: "Premium Member", description: "Subscribed to a Premium plan.", icon: "Crown", tier: "GOLD" },
+          { slug: "centurion", name: "Centurion", description: "Watched 100 titles.", icon: "Medal", tier: "GOLD" },
+          { slug: "cinephile", name: "Cinephile", description: "Watched 250+ titles. Legendary.", icon: "Sparkles", tier: "PLATINUM" },
+        ],
+      });
+    }
   } catch (e) {
     // Idempotent: ignore unique constraint errors on re-seed
     console.error("Seed error (non-fatal):", e instanceof Error ? e.message : String(e));

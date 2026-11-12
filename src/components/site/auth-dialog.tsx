@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { signIn } from "next-auth/react";
 import { Film, Loader2, Eye, EyeOff, Github, Mail, Shield, Check, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -177,8 +178,34 @@ export function AuthDialog() {
     }
   };
 
-  const oauthLogin = (provider: "google" | "github") => {
-    toast.info(`${provider === "google" ? "Google" : "GitHub"} OAuth requires client credentials. Add GOOGLE_CLIENT_ID / GITHUB_CLIENT_ID to .env.local and wire up NextAuth to enable.`);
+  const oauthLogin = async (provider: "google" | "github") => {
+    setLoading(true);
+    try {
+      const result = await signIn(provider, {
+        redirect: false,
+        callbackUrl: "/",
+      });
+      if (result?.error) {
+        const envHint = provider === "google"
+          ? "Add GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET to .env.local, then restart the dev server."
+          : "Add GITHUB_CLIENT_ID and GITHUB_CLIENT_SECRET to .env.local, then restart the dev server.";
+        toast.error(`${provider === "google" ? "Google" : "GitHub"} sign-in unavailable. ${envHint} See README.md for OAuth setup instructions.`);
+      } else if (result?.ok) {
+        toast.success(`Signed in with ${provider === "google" ? "Google" : "GitHub"}`);
+        setOpen(false);
+        await refresh();
+        navigate("home");
+      } else if (result?.url) {
+        // NextAuth redirected (e.g., to provider's consent screen) — follow it
+        window.location.href = result.url;
+      } else {
+        toast.info(`${provider === "google" ? "Google" : "GitHub"} OAuth is not configured yet. Add the required env vars to enable.`);
+      }
+    } catch (e) {
+      toast.error("Network error during OAuth. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const passwordStrength = evaluatePassword(regPassword);

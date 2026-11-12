@@ -318,10 +318,48 @@ Then `bun run db:push`.
 
 - **bcrypt** password hashing (12 rounds)
 - HTTP-only session cookies (30-day TTL)
+- **NextAuth.js v4** for OAuth (Google + GitHub) and Credentials providers
 - Roles: `USER`, `MODERATOR`, `ADMIN`, `PREMIUM`
 - `requireUser()` and `requireAdmin()` server-side guards
 - All admin routes return 403 if the user is not MODERATOR/ADMIN
 - All sensitive mutations (password change, profile update, deletion) are audit-logged
+- `getCurrentUser()` checks both NextAuth sessions (OAuth) and custom session cookies (email/password) — both work in parallel
+
+### Enabling Google OAuth
+
+1. Go to https://console.cloud.google.com/apis/credentials
+2. Create an OAuth 2.0 Client ID (Web application type)
+3. Add authorized redirect URI:
+   - Dev: `http://localhost:3000/api/auth/callback/google`
+   - Prod: `https://yourdomain.com/api/auth/callback/google`
+4. Add to `.env.local`:
+   ```
+   GOOGLE_CLIENT_ID="your-client-id.apps.googleusercontent.com"
+   GOOGLE_CLIENT_SECRET="your-client-secret"
+   ```
+5. Restart the dev server — the Google button in the auth dialog will now redirect to Google's consent screen.
+
+### Enabling GitHub OAuth
+
+1. Go to https://github.com/settings/developers → **New OAuth App**
+2. Set Authorization callback URL:
+   - Dev: `http://localhost:3000/api/auth/callback/github`
+   - Prod: `https://yourdomain.com/api/auth/callback/github`
+3. Add to `.env.local`:
+   ```
+   GITHUB_CLIENT_ID="your-client-id"
+   GITHUB_CLIENT_SECRET="your-client-secret"
+   ```
+4. Restart the dev server — the GitHub button in the auth dialog will now redirect to GitHub's authorize page.
+
+### How OAuth users are handled
+
+When a user signs in via Google or GitHub for the first time:
+- A `User` row is auto-created with their email, name, and avatar from the OAuth provider
+- A random password hash is generated (OAuth users don't use password auth)
+- An `OAuthAccount` row links the CineVerse user to the OAuth provider + provider account ID
+- A welcome notification is created
+- On subsequent sign-ins, the existing user is matched by email and the OAuth account is re-linked if needed
 
 ## External API integrations
 
@@ -423,7 +461,7 @@ The spec defines 1005 features across 20 modules. The current implementation cov
 - **Real Stripe/PayPal integration** for paid subscriptions
 - **WebSocket real-time notifications** (currently polling)
 - **Full community discussions** (forums, threads, replies)
-- **OAuth providers** (Google, GitHub — scaffolding exists)
+- **OAuth providers** (Google, GitHub — fully wired with NextAuth; needs OAuth client credentials in env to activate)
 - **AI recommendation engine** (currently uses heuristic interpretation)
 - **Internationalization** (i18n scaffolding via next-intl)
 

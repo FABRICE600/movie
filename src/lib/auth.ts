@@ -2,6 +2,8 @@ import bcrypt from "bcryptjs";
 import { cookies } from "next/headers";
 import { db } from "@/lib/db";
 import { randomUUID } from "crypto";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/auth.config";
 
 const SESSION_COOKIE = "cineverse_session";
 const SESSION_TTL_DAYS = 30;
@@ -39,6 +41,20 @@ export async function destroySession(): Promise<void> {
 }
 
 export async function getCurrentUser() {
+  // 1. Check NextAuth session (Google/GitHub OAuth or Credentials via NextAuth)
+  try {
+    const nextAuthSession = await getServerSession(authOptions);
+    if (nextAuthSession?.user?.email) {
+      const user = await db.user.findUnique({
+        where: { email: nextAuthSession.user.email.toLowerCase() },
+      });
+      if (user) return user;
+    }
+  } catch {
+    // NextAuth not yet configured or session lookup failed — fall through to custom session
+  }
+
+  // 2. Check our custom session cookie (email/password registered via /api/auth/register)
   const cookieStore = await cookies();
   const token = cookieStore.get(SESSION_COOKIE)?.value;
   if (!token) return null;

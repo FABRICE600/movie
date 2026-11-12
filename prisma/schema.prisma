@@ -428,3 +428,62 @@ model OAuthAccount {
   @@unique([provider, providerAccountId])
   @@index([userId])
 }
+
+model SiteSetting {
+  id          String   @id @default(cuid())
+  key         String   @unique
+  value       String
+  category    String   @default("general") // general | brand | theme | seo | features
+  updatedAt   DateTime @updatedAt
+  updatedBy   String?
+}
+
+model Announcement {
+  id          String   @id @default(cuid())
+  title       String
+  body        String
+  type        String   @default("INFO") // INFO | WARNING | MAINTENANCE | PROMOTION
+  audience    String   @default("ALL") // ALL | PREMIUM | ADMINS
+  isActive    Boolean  @default(true)
+  startsAt    DateTime @default(now())
+  endsAt      DateTime?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  createdBy   String?
+}
+
+model FeaturedContent {
+  id          String   @id @default(cuid())
+  slot        String   // HERO | CAROUSEL | EDITOR_PICK | SPOTLIGHT
+  tmdbId      Int
+  mediaType   String   // MOVIE | TV
+  title       String
+  posterUrl   String?
+  backdropUrl String?
+  order       Int      @default(0)
+  isActive    Boolean  @default(true)
+  startDate   DateTime @default(now())
+  endDate     DateTime?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([slot, isActive])
+}
+
+model AnalyticsEvent {
+  id          String   @id @default(cuid())
+  eventType   String   // PAGE_VIEW | SEARCH | MOVIE_VIEW | SIGNUP | LOGIN | RATING | REVIEW | WATCHLIST_ADD
+  userId      String?
+  tmdbId      Int?
+  mediaType   String?
+  query       String?
+  path        String?
+  ip          String?
+  userAgent   String?
+  metadata    String?  // JSON string
+  createdAt   DateTime @default(now())
+
+  @@index([eventType, createdAt])
+  @@index([userId])
+  @@index([createdAt])
+}

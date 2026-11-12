@@ -61,5 +61,12 @@ server.log
 # agent-ctx working directory
 /agent-ctx/
 
+# sandbox-only directories (not part of the application)
+/.zscripts/
+/tool-results/
+/upload/
+/mini-services/
+/examples/
+
 # OS files
 Thumbs.db

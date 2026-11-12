@@ -159,7 +159,17 @@ export function CollectionsView() {
 
 export function TrailersView() {
   const navigate = useAppStore((s) => s.navigate);
-  const items = [...MOVIES, ...TV_SHOWS].filter((m) => m.trailerYoutubeId).slice(0, 12);
+  // Sort by popularity and prefer titles with real YouTube trailers (not the placeholder).
+  const items = [...MOVIES, ...TV_SHOWS]
+    .filter((m) => m.trailerYoutubeId)
+    .sort((a, b) => {
+      // Items without placeholder rank higher
+      const aReal = a.trailerYoutubeId !== "dQw4w9WgXcQ" ? 1 : 0;
+      const bReal = b.trailerYoutubeId !== "dQw4w9WgXcQ" ? 1 : 0;
+      if (aReal !== bReal) return bReal - aReal;
+      return b.popularity - a.popularity;
+    })
+    .slice(0, 18);
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 space-y-6">
       <div>
